@@ -1,0 +1,92 @@
+/* ── Wrapper ── */
+.spinner-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 20px;
+  min-height: 400px;
+  gap: 24px;
+}
+
+.spinner-text {
+  font-size: 15px;
+  color: #888;
+  font-weight: 500;
+  animation: pulse-text 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse-text {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+/* ── Circle Spinner Base ── */
+.spinner-circle {
+  position: relative;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ── Sizes ── */
+.spinner-small {
+  width: 28px;
+  height: 28px;
+}
+
+.spinner-medium {
+  width: 48px;
+  height: 48px;
+}
+
+.spinner-large {
+  width: 64px;
+  height: 64px;
+}
+
+/* ── Spinning Ring ── */
+.spinner-circle::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 3px solid rgba(0, 0, 0, 0.05);
+  border-top-color: #e63946;
+  animation: spin 0.8s linear infinite;
+}
+
+/* ── Inner Core Dot ── */
+.spinner-circle-inner {
+  width: 30%;
+  height: 30%;
+  background: #e63946;
+  border-radius: 50%;
+  animation: pulse-core 1.5s ease-in-out infinite;
+}
+
+.spinner-small .spinner-circle-inner {
+  width: 8px;
+  height: 8px;
+}
+
+.spinner-medium .spinner-circle-inner {
+  width: 14px;
+  height: 14px;
+}
+
+.spinner-large .spinner-circle-inner {
+  width: 20px;
+  height: 20px;
+}
+
+/* ── Animations ── */
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes pulse-core {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(0.4); opacity: 0.5; }
+}

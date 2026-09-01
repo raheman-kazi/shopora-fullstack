@@ -1,0 +1,138 @@
+/* =========================================
+    GOOGLE AUTH SUCCESS — FULL PAGE
+========================================= */
+
+.google-auth-success {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f9fafb;
+    font-family: inherit;
+}
+
+/* =========================================
+    CENTER CARD
+========================================= */
+
+.google-auth-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 28px;
+    padding: 48px 56px;
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow:
+        0 1px 2px rgba(0, 0, 0, 0.04),
+        0 4px 16px rgba(0, 0, 0, 0.06);
+    animation: google-auth-fade-in 0.4s ease-out;
+}
+
+@keyframes google-auth-fade-in {
+    from {
+        opacity: 0;
+        transform: translateY(12px) scale(0.97);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* =========================================
+    LOGO
+========================================= */
+
+.google-auth-logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #111827;
+    letter-spacing: -0.5px;
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    text-decoration: none;
+    user-select: none;
+}
+
+.google-auth-dot {
+    color: #f97316;
+    font-size: 1.1rem;
+    margin-right: 1px;
+    line-height: 1;
+}
+
+/* =========================================
+    SPINNER
+========================================= */
+
+.google-auth-spinner-wrap {
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.google-auth-spinner {
+    width: 36px;
+    height: 36px;
+    border: 3px solid #e5e7eb;
+    border-top-color: #f97316;
+    border-radius: 50%;
+    animation: google-auth-spin 0.75s linear infinite;
+}
+
+@keyframes google-auth-spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* =========================================
+    TEXT
+========================================= */
+
+.google-auth-text {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: #6b7280;
+    margin: 0;
+    animation: google-auth-pulse 1.8s ease-in-out infinite;
+}
+
+@keyframes google-auth-pulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.45;
+    }
+}
+
+/* =========================================
+    MOBILE
+========================================= */
+
+@media (max-width: 480px) {
+
+    .google-auth-card {
+        padding: 40px 32px;
+        margin: 0 20px;
+    }
+
+    .google-auth-logo {
+        font-size: 1.3rem;
+    }
+
+    .google-auth-spinner {
+        width: 30px;
+        height: 30px;
+        border-width: 2.5px;
+    }
+
+    .google-auth-text {
+        font-size: 0.875rem;
+    }
+}

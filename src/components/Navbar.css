@@ -1,0 +1,437 @@
+/* ── Reset & Base ── */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ── Navbar ── */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  z-index: 1000;
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+}
+
+.navbar-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* ── Logo ── */
+.navbar-logo {
+  font-size: 22px;
+  font-weight: 700;
+  color: #111;
+  text-decoration: none;
+  letter-spacing: -0.5px;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  transition: opacity 0.2s;
+}
+
+.navbar-logo:hover { opacity: 0.75; }
+
+.logo-dot {
+  color: #e63946;
+  font-size: 14px;
+  animation: pulse-dot 2s ease-in-out infinite;
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(1.3); }
+}
+
+/* ── Nav Links (Desktop Inline, Mobile Sidebar) ── */
+.nav-links {
+  display: flex;
+  list-style: none;
+  align-items: center;
+  gap: 8px;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: #555;
+  font-size: 15px;
+  font-weight: 500;
+  padding: 8px 18px;
+  border-radius: 8px;
+  transition: all 0.25s ease;
+  position: relative;
+}
+
+.nav-link:hover {
+  color: #111;
+  background: rgba(0, 0, 0, 0.04);
+}
+
+.nav-link.active {
+  color: #e63946;
+  background: rgba(230, 57, 70, 0.06);
+}
+
+.nav-link.active::after {
+  content: '';
+  position: absolute;
+  bottom: 2px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 4px;
+  height: 4px;
+  background: #e63946;
+  border-radius: 50%;
+}
+
+/* Hide the mobile login list item on desktop */
+.mobile-login-li {
+  display: none;
+}
+
+
+/* ── DESKTOP Actions ── */
+.nav-actions-desktop {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+/* ── Shared Icon Button Styles ── */
+.nav-icon-btn {
+  position: relative;
+  color: #111;
+  text-decoration: none;
+  padding: 8px;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-icon-btn:hover {
+  color: #e63946;
+  background: rgba(230, 57, 70, 0.06);
+}
+
+/* Shared Badge */
+.icon-badge {
+  position: absolute;
+  top: 0px;
+  right: -2px;
+  background: #e63946;
+  color: #fff;
+  font-size: 9px;
+  font-weight: 700;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #fff;
+}
+
+.badge-bounce {
+  animation: badge-pop 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes badge-pop {
+  0% { transform: scale(0.5); }
+  50% { transform: scale(1.3); }
+  100% { transform: scale(1); }
+}
+
+/* Desktop Login Button */
+.nav-login-btn {
+  text-decoration: none;
+  background: #111;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 9px 26px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  letter-spacing: 0.2px;
+}
+
+.nav-login-btn:hover {
+  background: #e63946;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(230, 57, 70, 0.35);
+}
+
+.nav-login-btn:active { transform: translateY(0); }
+
+
+/* ── MOBILE RIGHT SIDE (Hidden on Desktop) ── */
+.nav-mobile-right {
+  display: none; 
+  align-items: center;
+  gap: 8px; 
+}
+
+/* ── Hamburger ── */
+.hamburger {
+  display: none; 
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+  z-index: 1001;
+}
+
+.hamburger span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: #111;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+  transform-origin: center;
+}
+
+.hamburger.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.hamburger.active span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.hamburger.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+
+/* ── Responsive (Mobile) ── */
+@media (max-width: 640px) {
+  /* 1. Show the mobile right side container */
+  .nav-mobile-right {
+    display: flex;
+  }
+
+  /* 2. Hide the desktop actions completely */
+  .nav-actions-desktop {
+    display: none;
+  }
+
+  /* 3. Show the hamburger */
+  .hamburger {
+    display: flex;
+  }
+
+  /* 4. Mobile Menu Slide-in Sidebar */
+  .nav-links {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 260px;
+    height: 100vh;
+    background: #fff;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 90px 32px 32px;
+    gap: 4px;
+    box-shadow: -4px 0 24px rgba(0, 0, 0, 0.08);
+    transition: right 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 999; /* Ensures it sits above content but below the z-1001 hamburger */
+  }
+
+  .nav-links.open {
+    right: 0;
+  }
+
+  .nav-link {
+    width: 100%;
+    font-size: 16px;
+    padding: 12px 16px;
+    border-radius: 10px;
+  }
+
+  .nav-link:hover,
+  .nav-link.active {
+    background: rgba(230, 57, 70, 0.06);
+  }
+
+  /* 5. Show the real mobile login button inside the drawer */
+  .mobile-login-li {
+    display: block;
+    width: 100%;
+    margin-top: 20px;
+  }
+
+  .mobile-login-btn {
+    display: block;
+    width: 100%;
+    text-align: left;
+    padding: 12px 16px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #e63946;
+    border-radius: 10px;
+    transition: background 0.2s;
+    text-decoration: none;
+  }
+
+  .mobile-login-btn:hover {
+    background: rgba(230, 57, 70, 0.06);
+  }
+
+  /* Mobile specific icon tweaks */
+  .mobile-icon { 
+    padding: 4px; 
+  }
+  
+  .mobile-badge { 
+    border-color: rgba(255, 255, 255, 0.85); 
+    width: 14px; 
+    height: 14px; 
+    font-size: 8px; 
+    top: -2px; 
+    right: -4px;
+  }
+}
+
+/* ── Profile Button (Desktop) ── */
+.nav-profile-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: #111;
+  background: #f3f4f6;
+  padding: 6px 12px 6px 6px;
+  border-radius: 100px;
+  transition: all 0.2s ease;
+}
+
+.nav-profile-btn:hover {
+  background: #e5e7eb;
+}
+
+.nav-avatar {
+  width: 32px;
+  height: 32px;
+  background: #e63946;
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+
+.nav-profile-name {
+  font-size: 14px;
+  font-weight: 600;
+  max-width: 80px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.nav-profile-btn svg {
+  color: #888;
+  transition: transform 0.2s;
+}
+
+.nav-profile-btn:hover svg {
+  transform: rotate(90deg);
+}
+
+/* ── Profile Icon (Mobile) ── */
+.mobile-profile-icon {
+  position: relative;
+}
+
+.mobile-avatar {
+  width: 28px;
+  height: 28px;
+  background: #e63946;
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+  border: 2px solid #fff;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+}
+
+/* ── Update Mobile Responsive Rules ── */
+@media (max-width: 640px) {
+  /* Ensure mobile profile icon shows up neatly */
+  .mobile-profile-icon { 
+    padding: 0; 
+  }
+}
+
+.user-greeting {
+  font-size: 14px;
+  font-weight: 600;
+  color: #555;
+}
+
+
+
+.mobile-user-info {
+  width: 100%;
+  margin-top: 20px;
+  padding: 12px 16px;
+  border-radius: 10px;
+  background: #f9f9f9;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.mobile-user-info span {
+  font-size: 14px;
+  font-weight: 600;
+  color: #111;
+}
+
+.mobile-logout-btn {
+  background: none;
+  border: none;
+  text-align: left;
+  font-size: 13px;
+  font-weight: 600;
+  color: #e63946;
+  cursor: pointer;
+  padding: 0;
+  font-family: inherit;
+}
+
+/* =====================================================
+   ADMIN LINK (sirf admin users ko dikhta hai)
+===================================================== */
+
+.nav-admin-btn {
+  display: inline-flex;
+  align-items: center;
+  padding: 7px 12px;
+  border: 1px solid #e63946;
+  border-radius: 6px;
+  color: #e63946;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 0.15s, color 0.15s;
+}
+
+.nav-admin-btn:hover {
+  background: #e63946;
+  color: #fff;
+}
