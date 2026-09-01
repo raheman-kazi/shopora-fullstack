@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import './CartPage.css';
@@ -61,6 +60,10 @@ const CartPage = ({ cartItems, dispatch }) => {
               item.product.images?.[0] ||
               '',
             images: item.product.images || [],
+
+            // Stock zaroori hai — iske bina cart har item ko
+            // out of stock samajh leta tha.
+            stock: Number(item.product.stock) || 0,
           }));
 
         setItems(formattedItems);
@@ -665,4 +668,3 @@ const handleRemoveItem = async (id) => {
 };
 
 export default CartPage;
-

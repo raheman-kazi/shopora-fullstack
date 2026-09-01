@@ -79,6 +79,15 @@ const ProductModal = ({
       return;
     }
 
+    // Stock khaali chhodna = 0 = product turant
+    // out of stock. Isliye saaf-saaf poochte hain.
+    if (form.stock === "" || form.stock === null) {
+      setError(
+        "Stock is required. Enter 0 only if the product is genuinely unavailable."
+      );
+      return;
+    }
+
     setSaving(true);
 
     try {
@@ -195,8 +204,13 @@ const ProductModal = ({
                 min="0"
                 value={form.stock}
                 onChange={setField("stock")}
-                placeholder="0"
+                placeholder="e.g. 20"
               />
+              {String(form.stock) === "0" && (
+                <small style={{ color: "#b45309", fontSize: 12 }}>
+                  Shoppers will see this as out of stock
+                </small>
+              )}
             </div>
 
             <div className="form-field full">
