@@ -35,9 +35,39 @@ const registerUser = async (req, res) => {
     // REQUIRED FIELDS
     // =========================
 
+    // =========================
+    // VALIDATION
+    //
+    // NOTE: model ka minlength: 6 password par
+    // kaam nahi karta, kyunki hum hash karke save
+    // karte hain aur hash hamesha 60 chars ka hota
+    // hai. Isliye check yahan karna zaroori hai.
+    // =========================
+
     if (!name || !email || !password) {
       return res.status(400).json({
         message: "Please fill all required fields",
+      });
+    }
+
+    // Email format
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(String(email).trim())) {
+      return res.status(400).json({
+        message: "Please enter a valid email address",
+      });
+    }
+
+    // Password length
+    if (String(password).length < 6) {
+      return res.status(400).json({
+        message: "Password must be at least 6 characters",
+      });
+    }
+
+    // Name length
+    if (String(name).trim().length < 2) {
+      return res.status(400).json({
+        message: "Please enter your name",
       });
     }
 
@@ -225,6 +255,21 @@ const loginUser = async (req, res) => {
       return res.status(401).json({
         message:
           "Invalid email/phone or password",
+      });
+    }
+
+    // =========================
+    // GOOGLE-ONLY ACCOUNT
+    //
+    // Google se bana user ka password hota hi nahi.
+    // Iske bina bcrypt.compare crash karta tha aur
+    // user ko "Server error" dikhta tha.
+    // =========================
+
+    if (!user.password) {
+      return res.status(400).json({
+        message:
+          "This account uses Google sign-in. Please continue with Google.",
       });
     }
 
